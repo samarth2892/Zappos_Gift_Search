@@ -1,0 +1,43 @@
+<html><head>
+  <SCRIPT src="http://java.com/js/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'ZapposGiftSearchApp.jnlp'
+            },
+            {
+                javafx : '8.0+'
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbed_ZapposGiftSearchApp_id() {
+        dtjava.embed(
+            {
+                id : 'ZapposGiftSearchApp_id',
+                url : 'ZapposGiftSearchApp.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : 600,
+                height : 400
+            },
+            {
+                javafx : '8.0+'
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbed_ZapposGiftSearchApp_id);
+</script>
+
+</head><body>
+<h2>Test page for <b>Zappos_Gift_Search</b></h2>
+  <b>Webstart:</b> <a href='ZapposGiftSearchApp.jnlp' onclick="return launchApplication('ZapposGiftSearchApp.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>
