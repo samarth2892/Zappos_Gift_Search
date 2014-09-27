@@ -13,10 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -31,9 +28,9 @@ import java.util.ArrayList;
  * @author Samarth Patel
  */
 public class GiftSearchApp extends Application{
-    private Scene firstScreen;
     private StackPane stack = new StackPane();
     private BorderPane border = new BorderPane();
+    private Button go;
 
     /**
      * Creates the top part of the scene
@@ -56,17 +53,17 @@ public class GiftSearchApp extends Application{
         grid.add(noOfProLabel, 0, 1);
 
         final TextField noOfProductFiled = new TextField();
-        noOfProductFiled.setMaxSize(40, 10);
+        noOfProductFiled.setMaxSize(60, 10);
         grid.add(noOfProductFiled, 1, 1);
 
         Label priceRangeLabel = new Label("  Price Range:");
         grid.add(priceRangeLabel, 2, 1);
 
         final TextField priceRange = new TextField();
-        priceRange.setMaxSize(40, 10);
+        priceRange.setMaxSize(60, 10);
         grid.add(priceRange, 3, 1);
 
-        Button go = new Button();
+        go = new Button();
 
         go.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -82,8 +79,8 @@ public class GiftSearchApp extends Application{
     /**
      * Instantiates APIRequest, gets results and puts them in a gird pane
      * which is then added to main borderpane.
-     * @param noOfProducts
-     * @param priceRange
+     * @param noOfProducts String form of product result limit
+     * @param priceRange String form of price range
      */
     private void createResults(String noOfProducts, String priceRange) {
 
@@ -106,12 +103,14 @@ public class GiftSearchApp extends Application{
             } else {
                 final ScrollPane scrollPane = new ScrollPane();
                 final GridPane grid = new GridPane();
-
+                go.setDisable(true);
                 border.setCenter(new Text("Please wait..."));
 
                 scrollPane.setStyle("-fx-background-color: transparent");
-                grid.setStyle("-fx-background-color:transparent;");
+                scrollPane.setFitToWidth(true);
+                scrollPane.setFitToHeight(true);
                 grid.setAlignment(Pos.CENTER);
+                grid.setStyle("-fx-background-color:transparent;");
                 grid.setHgap(10);
                 grid.setVgap(10);
                 grid.setPadding(new Insets(15, 15, 15, 15));
@@ -134,14 +133,15 @@ public class GiftSearchApp extends Application{
 
                 scrollPane.setContent(grid);
                 border.setCenter(scrollPane);
+                go.setDisable(false);
             }
         }
     }
 
     /**
      * verifies if a string can be converted to double
-     * @param number
-     * @return
+     * @param number String from of a number
+     * @return double form of a number
      */
     private double verifyNumber(String number) {
         double num;
@@ -156,7 +156,7 @@ public class GiftSearchApp extends Application{
 
     /**
      * This method is used to make any error popups
-     * @param error
+     * @param error Error string which is to be shown
      */
     private void showPopup(String error) {
         final VBox errorPopup = new VBox(20);
@@ -196,15 +196,14 @@ public class GiftSearchApp extends Application{
 
     /**
      * This method puts together all the Nodes and return a scene object
-     * @return
+     * @return A scene instance
      */
     public Scene createScene() {
         stack.getChildren().add(border);
         border.setId("border");
         border.setTop(createTop());
-        firstScreen = new Scene(stack, 600, 500);
-        firstScreen.getStylesheets().add
-                ("styleSheet.css");
+        Scene firstScreen = new Scene(stack, 700, 600);
+        firstScreen.getStylesheets().add("styleSheet.css");
         return firstScreen;
     }
 

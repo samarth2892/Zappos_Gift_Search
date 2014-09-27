@@ -34,9 +34,9 @@ public class APIRequest {
     /**
      * search method is used to make Http call and given the constraints
      * limit of results, keyword to search related items, upper price limit
-     * @param noOfProducts
-     * @param keyword
-     * @param priceLimit
+     * @param noOfProducts Limit of results
+     * @param keyword Keyword for what we are looking for.
+     * @param priceLimit upper price limit
      * @return ArrayList<Product> (returns an ArrayList of GiftSearchModel.Product objects)
      */
     public ArrayList<Product> search(double noOfProducts, String keyword, double priceLimit) {
